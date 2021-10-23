@@ -17,11 +17,13 @@ function loadButtons(n){
         });
         buttonContainer.append(newButton);
     }
+    selectedButton = document.getElementById(`btn0`);
+    selectedButton.classList.add("selected");
+ 
 }
 
 // Swap tiles 
 function swap(index){
-    console.log(index);
     if (index == selected + 1){
 
     }else if(index == selected - 1){
@@ -30,5 +32,14 @@ function swap(index){
 
     }else if (index + n == selected % size ){
 
-    }
+    } 
+}
+
+// Applies stylings to the selected tile
+function setSelected(index){
+    currentButton = document.getElementById(`btn${selected}`);
+    currentButton.classList.remove('selected');
+    newButton = document.getElementById(`btn${index}`);
+    newButton.classList.add("selected");
+    selected = index;
 }
