@@ -1,0 +1,22 @@
+h1{
+    text-align: center;
+    font-size: 4rem;
+}
+
+#btns{
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.btn{
+    font-size: 24px;
+    height:120px;
+    width: 25%;
+    cursor: pointer;
+}
+
+#btn1{
+    background-color: #FFF;
+    border: 1px solid #DDD;
+}
