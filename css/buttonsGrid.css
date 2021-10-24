@@ -1,17 +1,22 @@
+body{
+    background-image: radial-gradient(circle, #FF8961, #FFFB89, #74BDCB, #0E42C4);
+}
+
+
 h1{
     text-align: center;
     font-size: 4rem;
 }
 
 #btns{
-    width: 500px;
+    width: 400px;
     margin: 0 auto;
     position: relative;
 }
 
 .btn{
     font-size: 24px;
-    height:120px;
+    height:80px;
     width: 25%;
     cursor: pointer;
 }

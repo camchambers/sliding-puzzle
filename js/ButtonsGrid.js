@@ -5,7 +5,7 @@ let buttonContainer = document.getElementById('btns');
 loadButtons(size);
 
 // Create buttons
-function loadButtons(n){
+function loadButtons(n) {
     for (let b = 0; b < n ** 2; b++) {
         var newButton = document.createElement('button');
         newButton.id = `btn${b}`;
@@ -19,24 +19,27 @@ function loadButtons(n){
     }
     selectedButton = document.getElementById(`btn0`);
     selectedButton.classList.add("selected");
- 
+
 }
 
 // Swap tiles 
-function swap(index){
-    if (index == selected + 1){
+function swap(index) {
+    if (index == selected + 1) {
+        console.log(selected + 1);
+        if ((selected + 1) % size != 0) {
+            setSelected(selected + 1);
+        }
+    } else if (index == selected - 1) {
 
-    }else if(index == selected - 1){
+    } else if (index - size == selected % size) {
 
-    }else if(index - n == selected % size){
+    } else if (index + size == selected % size) {
 
-    }else if (index + n == selected % size ){
-
-    } 
+    }
 }
 
 // Applies stylings to the selected tile
-function setSelected(index){
+function setSelected(index) {
     currentButton = document.getElementById(`btn${selected}`);
     currentButton.classList.remove('selected');
     newButton = document.getElementById(`btn${index}`);
