@@ -1,5 +1,5 @@
 let size = 4;
-let highlighted = 0;
+let highlighted = 8;
 
 let buttonContainer = document.getElementById('btns');
 loadButtons(size);
@@ -13,28 +13,30 @@ function loadButtons(n) {
         newButton.innerHTML = b;
         newButton.classList.add('btn');
         newButton.addEventListener('click', function () {
-            swap(this.getAttribute('index'));
+            swap(parseInt(this.getAttribute('index')));
         });
         buttonContainer.append(newButton);
     }
-    selectedButton = document.getElementById(`btn0`);
+    selectedButton = document.getElementById(`btn8`);
     selectedButton.classList.add("selected");
 }
 
 // Swap tiles 
 function swap(clicked) {
+    // Check if we are trying to swap right
     if (clicked == highlighted + 1) {
-        if ((highlighted + 1) % size != 0) {
-            setSelected(highlighted + 1);
+        if (clicked % size != 0) {
+            setSelected(clicked);
         }
-    } else if (clicked == highlighted - 1) {
-        if ((highlighted) % size != 0) {
-            setSelected(highlighted - 1);
+    // Check if we are trying to swap left
+    } else if (clicked == highlighted - 1){
+        if (clicked % size != 3){
+            setSelected(clicked);
         }
-    } else if (clicked - size == highlighted % size) {
-
-    } else if (clicked + size == highlighted % size) {
-
+    } else if (clicked == highlighted + size){
+        setSelected(clicked);
+    } else if (clicked == highlighted - size){
+        setSelected(clicked);
     }
 }
 
