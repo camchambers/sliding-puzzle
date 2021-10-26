@@ -1,5 +1,5 @@
 let size = 4;
-let selected = 0;
+let highlighted = 0;
 
 let buttonContainer = document.getElementById('btns');
 loadButtons(size);
@@ -19,30 +19,30 @@ function loadButtons(n) {
     }
     selectedButton = document.getElementById(`btn0`);
     selectedButton.classList.add("selected");
-
 }
 
 // Swap tiles 
-function swap(index) {
-    if (index == selected + 1) {
-        console.log(selected + 1);
-        if ((selected + 1) % size != 0) {
-            setSelected(selected + 1);
+function swap(clicked) {
+    if (clicked == highlighted + 1) {
+        if ((highlighted + 1) % size != 0) {
+            setSelected(highlighted + 1);
         }
-    } else if (index == selected - 1) {
+    } else if (clicked == highlighted - 1) {
+        if ((highlighted) % size != 0) {
+            setSelected(highlighted - 1);
+        }
+    } else if (clicked - size == highlighted % size) {
 
-    } else if (index - size == selected % size) {
-
-    } else if (index + size == selected % size) {
+    } else if (clicked + size == highlighted % size) {
 
     }
 }
 
 // Applies stylings to the selected tile
 function setSelected(index) {
-    currentButton = document.getElementById(`btn${selected}`);
+    currentButton = document.getElementById(`btn${highlighted}`);
     currentButton.classList.remove('selected');
     newButton = document.getElementById(`btn${index}`);
     newButton.classList.add("selected");
-    selected = index;
+    highlighted = index;
 }
