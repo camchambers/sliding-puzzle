@@ -1,5 +1,5 @@
 let size = 4;
-let highlighted = 8;
+let highlighted = 0;
 
 let buttonContainer = document.getElementById('btns');
 loadButtons(size);
@@ -17,8 +17,10 @@ function loadButtons(n) {
         });
         buttonContainer.append(newButton);
     }
-    selectedButton = document.getElementById(`btn8`);
+    selectedButton = document.getElementById(`btn0`);
     selectedButton.classList.add("selected");
+    selectedButton.innerHTML = ".";
+
 }
 
 // Swap tiles 
@@ -43,8 +45,12 @@ function swap(clicked) {
 // Applies stylings to the selected tile
 function setSelected(index) {
     currentButton = document.getElementById(`btn${highlighted}`);
+    currentButtonText = currentButton.innerHTML;
     currentButton.classList.remove('selected');
     newButton = document.getElementById(`btn${index}`);
+    currentButton.innerHTML = newButton.innerHTML;
+    newButton.innerHTML = currentButtonText;
     newButton.classList.add("selected");
+    currentButton
     highlighted = index;
 }
