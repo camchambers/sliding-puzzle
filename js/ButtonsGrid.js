@@ -7,7 +7,9 @@ newGame();
 
 function newGame() {
     loadButtons(size);
-    shuffle();
+    setTimeout(() => {
+        shuffle();
+    }, 1000);
 }
 
 // Create buttons
@@ -26,7 +28,6 @@ function loadButtons(n) {
     selectedButton = document.getElementById(`btn0`);
     selectedButton.classList.add("selected");
     selectedButton.innerHTML = ".";
-
 }
 
 function shuffle() {
@@ -48,12 +49,6 @@ function shuffle() {
             swap(direction);
         }, i * 10);
     }
-
-    // lock the board
-    // pick a random number between 20 and 50 for number of shuffles
-    // pick a random number between 1 and 4 for direction
-    // call shuffle with value of direction (random number)
-
 }
 
 
