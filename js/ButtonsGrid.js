@@ -2,7 +2,13 @@ let size = 4;
 let highlighted = 0;
 
 let buttonContainer = document.getElementById('btns');
-loadButtons(size);
+
+newGame();
+
+function newGame() {
+    loadButtons(size);
+    shuffle();
+}
 
 // Create buttons
 function loadButtons(n) {
@@ -23,21 +29,56 @@ function loadButtons(n) {
 
 }
 
+function shuffle() {
+    numberOfShuffles = Math.floor(Math.random() * (200 - 100) + 100);
+
+    for (let i = 0; i < numberOfShuffles; i++) {
+        setTimeout(function timer() {
+            let x = Math.floor(Math.random() * 4);
+            let direction = 0;
+            if (x == 0) {
+                direction = highlighted + 1;
+            } else if (x == 1) {
+                direction = highlighted - 1;
+            } else if (x == 2) {
+                direction = highlighted + size;
+            } else if (x == 3) {
+                direction = highlighted - size;
+            }
+            swap(direction);
+        }, i * 10);
+    }
+
+    // lock the board
+    // pick a random number between 20 and 50 for number of shuffles
+    // pick a random number between 1 and 4 for direction
+    // call shuffle with value of direction (random number)
+
+}
+
+
+
+
 // Swap tiles 
 function swap(clicked) {
+
+    if (clicked < 0 || clicked > (size ** 2) - 1) {
+        return;
+    }
+
     // Check if we are trying to swap right
     if (clicked == highlighted + 1) {
         if (clicked % size != 0) {
             setSelected(clicked);
         }
-    // Check if we are trying to swap left
-    } else if (clicked == highlighted - 1){
-        if (clicked % size != 3){
+        // Check if we are trying to swap left
+    } else if (clicked == highlighted - 1) {
+        if (clicked % size != 3) {
             setSelected(clicked);
         }
-    } else if (clicked == highlighted + size){
+    } else if (clicked == highlighted + size) {
         setSelected(clicked);
-    } else if (clicked == highlighted - size){
+    } else if (clicked == highlighted - size) {
         setSelected(clicked);
     }
 }
@@ -53,4 +94,8 @@ function setSelected(index) {
     newButton.classList.add("selected");
     currentButton
     highlighted = index;
+}
+
+function swapText() {
+
 }
