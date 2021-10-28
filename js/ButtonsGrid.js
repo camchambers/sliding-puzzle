@@ -1,5 +1,6 @@
 let size = 4;
 let highlighted = 0;
+let shuffled = false;
 
 let buttonContainer = document.getElementById('btns');
 
@@ -27,7 +28,7 @@ function loadButtons(n) {
     }
     selectedButton = document.getElementById(`btn0`);
     selectedButton.classList.add("selected");
-    selectedButton.innerHTML = ".";
+    selectedButton.innerHTML = "0";
 }
 
 function shuffle() {
@@ -47,7 +48,11 @@ function shuffle() {
                 direction = highlighted - size;
             }
             swap(direction);
+            if (i >= numberOfShuffles - 1) {
+                shuffled = true;
+            }
         }, i * 10);
+
     }
 }
 
@@ -71,11 +76,32 @@ function swap(clicked) {
         if (clicked % size != 3) {
             setSelected(clicked);
         }
+        // Check if we are trying to swap up
     } else if (clicked == highlighted + size) {
         setSelected(clicked);
+        // Check if we are trying to swap down 
     } else if (clicked == highlighted - size) {
         setSelected(clicked);
     }
+
+    if (shuffled) {
+        if (checkHasWon()){
+            alert("Winner!")
+        }
+    }
+}
+
+function checkHasWon() {
+
+    for (let b = 0; b < size ** 2; b++) {
+        currentTile = document.getElementById(`btn${b}`);
+        currentTileIndex = currentTile.getAttribute('index');
+        currentTileValue = currentTile.innerHTML;
+        if (parseInt(currentTileIndex) != parseInt(currentTileValue)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // Applies stylings to the selected tile
