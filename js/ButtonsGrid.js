@@ -1,5 +1,6 @@
 let size = 4;
-let highlighted = 0;
+let numberOfTiles = size ** 2;
+let highlighted = numberOfTiles;
 let shuffled = false;
 
 let buttonContainer = document.getElementById('btns');
@@ -10,12 +11,12 @@ function newGame() {
     loadButtons(size);
     setTimeout(() => {
         shuffle();
-    }, 1000);
+    }, 2000);
 }
 
 // Create buttons
 function loadButtons(n) {
-    for (let b = 0; b < n ** 2; b++) {
+    for (let b = 1; b <= numberOfTiles; b++) {
         var newButton = document.createElement('button');
         newButton.id = `btn${b}`;
         newButton.setAttribute('index', b);
@@ -26,15 +27,15 @@ function loadButtons(n) {
         });
         buttonContainer.append(newButton);
     }
-    selectedButton = document.getElementById(`btn0`);
+    selectedButtonId = 'btn' + highlighted;
+    selectedButton = document.getElementById(selectedButtonId);
     selectedButton.classList.add("selected");
-    selectedButton.innerHTML = "0";
 }
 
 function shuffle() {
     numberOfShuffles = Math.floor(Math.random() * (200 - 100) + 100);
 
-    for (let i = 0; i < numberOfShuffles; i++) {
+    for (let i = 1; i <= numberOfShuffles; i++) {
         setTimeout(function timer() {
             let x = Math.floor(Math.random() * 4);
             let direction = 0;
@@ -52,28 +53,24 @@ function shuffle() {
                 shuffled = true;
             }
         }, i * 10);
-
     }
 }
-
-
-
 
 // Swap tiles 
 function swap(clicked) {
 
-    if (clicked < 0 || clicked > (size ** 2) - 1) {
+    if (clicked < 1 || clicked > (numberOfTiles)) {
         return;
     }
 
     // Check if we are trying to swap right
     if (clicked == highlighted + 1) {
-        if (clicked % size != 0) {
+        if (clicked % size != 1) {
             setSelected(clicked);
         }
         // Check if we are trying to swap left
     } else if (clicked == highlighted - 1) {
-        if (clicked % size != 3) {
+        if (clicked % size != 0) {
             setSelected(clicked);
         }
         // Check if we are trying to swap up
@@ -85,7 +82,7 @@ function swap(clicked) {
     }
 
     if (shuffled) {
-        if (checkHasWon()){
+        if (checkHasWon()) {
             alert("Winner!")
         }
     }
@@ -93,7 +90,7 @@ function swap(clicked) {
 
 function checkHasWon() {
 
-    for (let b = 0; b < size ** 2; b++) {
+    for (let b = 1; b <= numberOfTiles; b++) {
         currentTile = document.getElementById(`btn${b}`);
         currentTileIndex = currentTile.getAttribute('index');
         currentTileValue = currentTile.innerHTML;
@@ -115,8 +112,4 @@ function setSelected(index) {
     newButton.classList.add("selected");
     currentButton
     highlighted = index;
-}
-
-function swapText() {
-
 }
