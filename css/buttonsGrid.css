@@ -1,5 +1,5 @@
-body {
-    background-image: radial-gradient(circle, #FF8961, #FFFB89, #74BDCB, #0E42C4);
+html {
+     background: radial-gradient(circle, #FF8961, #FFFB89, #74BDCB, #0E42C4) fixed;
 }
 
 h1 {
@@ -18,7 +18,7 @@ h1 {
 
 .selected {
     background-color: #FFF;
-    border: 1px solid #DDD;
+    border: none;
     color: white;
 }
 

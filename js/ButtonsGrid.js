@@ -11,7 +11,7 @@ function newGame() {
     loadButtons(size);
     setTimeout(() => {
         shuffle();
-    }, 2000);
+    }, 500);
 }
 
 // Create buttons
@@ -33,9 +33,10 @@ function loadButtons(n) {
 }
 
 function shuffle() {
-    numberOfShuffles = Math.floor(Math.random() * (200 - 100) + 100);
+    let minShuffles = 100;
+    let totalShuffles = minShuffles + Math.floor(Math.random() * (200 - 100) + 100);
 
-    for (let i = 1; i <= numberOfShuffles; i++) {
+    for (let i = minShuffles; i <= totalShuffles; i++) {
         setTimeout(function timer() {
             let x = Math.floor(Math.random() * 4);
             let direction = 0;
@@ -49,7 +50,7 @@ function shuffle() {
                 direction = highlighted - size;
             }
             swap(direction);
-            if (i >= numberOfShuffles - 1) {
+            if (i >= totalShuffles - 1) {
                 shuffled = true;
             }
         }, i * 10);
