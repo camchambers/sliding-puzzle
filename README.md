@@ -3,6 +3,7 @@
 ## TODO 
 - [x] Check for a win
 - [ ] Keyboard controls
+- [ ] Add number of moves counter
 - [ ] Accomodate different board sizes
 - [ ] Collapsible control panel
 - [ ] Board initially disabled

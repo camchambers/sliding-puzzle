@@ -5,6 +5,24 @@ let shuffled = false;
 
 let buttonContainer = document.getElementById('btns');
 
+// Keyboard controls
+const RIGHT_ARROW = 39;
+const LEFT_ARROW = 37;
+const UP_ARROW = 40;
+const DOWN_ARROW = 38;
+window.onkeydown = function (event) {
+    console.log(event.keyCode);
+    if (event.keyCode === RIGHT_ARROW) {
+        swap(highlighted + 1);
+    } else if (event.keyCode === LEFT_ARROW) {
+        swap(highlighted - 1);
+    } else if (event.keyCode === UP_ARROW) {
+        swap(highlighted + size);
+    } else if (event.keyCode === DOWN_ARROW) {
+        swap(highlighted - size);
+    }
+};
+
 newGame();
 
 function newGame() {
@@ -90,7 +108,6 @@ function swap(clicked) {
 }
 
 function checkHasWon() {
-
     for (let b = 1; b <= numberOfTiles; b++) {
         currentTile = document.getElementById(`btn${b}`);
         currentTileIndex = currentTile.getAttribute('index');
