@@ -3,7 +3,7 @@ let numberOfTiles = size ** 2;
 let highlighted = numberOfTiles;
 let shuffled = false;
 
-let buttonContainer = document.getElementById('btns');
+let buttonContainer = document.getElementById('tiles');
 
 // Keyboard controls
 const RIGHT_ARROW = 39;
@@ -26,28 +26,28 @@ window.onkeydown = function (event) {
 newGame();
 
 function newGame() {
-    loadButtons(size);
+    loadTiles(size);
     setTimeout(() => {
         shuffle();
     }, 500);
 }
 
 // Create buttons
-function loadButtons(n) {
+function loadTiles(n) {
     for (let b = 1; b <= numberOfTiles; b++) {
-        var newButton = document.createElement('button');
-        newButton.id = `btn${b}`;
-        newButton.setAttribute('index', b);
-        newButton.innerHTML = b;
-        newButton.classList.add('btn');
-        newButton.addEventListener('click', function () {
+        var newTile = document.createElement('button');
+        newTile.id = `btn${b}`;
+        newTile.setAttribute('index', b);
+        newTile.innerHTML = b;
+        newTile.classList.add('btn');
+        newTile.addEventListener('click', function () {
             swap(parseInt(this.getAttribute('index')));
         });
-        buttonContainer.append(newButton);
+        buttonContainer.append(newTile);
     }
-    selectedButtonId = 'btn' + highlighted;
-    selectedButton = document.getElementById(selectedButtonId);
-    selectedButton.classList.add("selected");
+    selectedTileId = 'btn' + highlighted;
+    selectedTile = document.getElementById(selectedTileId);
+    selectedTile.classList.add("selected");
 }
 
 function shuffle() {
@@ -121,13 +121,12 @@ function checkHasWon() {
 
 // Applies stylings to the selected tile
 function setSelected(index) {
-    currentButton = document.getElementById(`btn${highlighted}`);
-    currentButtonText = currentButton.innerHTML;
-    currentButton.classList.remove('selected');
-    newButton = document.getElementById(`btn${index}`);
-    currentButton.innerHTML = newButton.innerHTML;
-    newButton.innerHTML = currentButtonText;
-    newButton.classList.add("selected");
-    currentButton
+    currentTile = document.getElementById(`btn${highlighted}`);
+    currentTileText = currentTile.innerHTML;
+    currentTile.classList.remove('selected');
+    newTile = document.getElementById(`btn${index}`);
+    currentTile.innerHTML = newTile.innerHTML;
+    newTile.innerHTML = currentTileText;
+    newTile.classList.add("selected");
     highlighted = index;
 }
