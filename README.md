@@ -14,6 +14,9 @@ shuffled after a few seconds. The purpose of the game is to place tiles back
 in their original order by swapping the empty tile with adjacent tiles. Adjacent
 tiles can be swapped by clicking on them or using the arrow keys. 
 
+## Contributing
+Code contributions are welcome. Please see the [Sliding Puzzle Board](https://github.com/camchambers/sliding-puzzle/projects/1) to see how you can contribute to this project. 
+
 ## TODO 
 - [x] Check for a win
 - [x] Keyboard controls
