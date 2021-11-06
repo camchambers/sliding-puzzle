@@ -1,4 +1,12 @@
 # Sliding Puzzle
+A classic sliding puzzle game. 
+
+![sliding-puzzle.png](./screenshots/sliding-puzzle.png?raw=true "Game Screenshot")
+
+## Instructions
+The board starts in order. After game options are selected, the board is
+automatically shuffled. The purpose of the game is to place tiles back
+in their original order.
 
 ## TODO 
 - [x] Check for a win
@@ -11,7 +19,3 @@
 - [ ] Add a number of moves counter
 - [ ] Create an animation for when the game is won
 
-## Game Instructions
-The board starts in order. After game options are selected, the board is
-automatically shuffled. The purpose of the game is to place tiles back
-in their original order.
