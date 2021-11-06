@@ -77,7 +77,6 @@ function shuffle() {
 
 // Swap tiles 
 function swap(clicked) {
-
     if (clicked < 1 || clicked > (numberOfTiles)) {
         return;
     }
