@@ -1,6 +1,8 @@
 # Sliding Puzzle
 A classic sliding puzzle game. 
 
+[View Demo on CodePen](https://codepen.io/camchambers/pen/rNzdJzG)
+
 ![sliding-puzzle.png](./screenshots/sliding-puzzle.png?raw=true "Game Screenshot")
 
 ## How to Play
