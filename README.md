@@ -3,7 +3,7 @@ A classic sliding puzzle game.
 
 [View Demo on CodePen](https://codepen.io/camchambers/pen/rNzdJzG)
 
-![sliding-puzzle.png](./screenshots/sliding-puzzle.gif?raw=true "Game Screenshot")
+<img src="./screenshots/sliding-puzzle.gif?raw=true" alt="Sliding Puzzle Animation" width="400"/>
 
 ## How to Play
 Download or clone the repo and open index.html. 
