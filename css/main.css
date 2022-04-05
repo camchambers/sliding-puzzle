@@ -23,14 +23,21 @@ h1 {
     -webkit-text-fill-color: white !important;
 }
 
-.btn, .btninplace {
+.btn, .btninplace, .btnoutofplace {
     font-size: 24px;
     height: 80px;
     width: 25%;
     cursor: pointer;
     -webkit-text-fill-color: black;
+    background-size: 100% 100%;
+}
+
+.btnoutofplace {
+    background-image: url("../images/out_of_place_tile.png");
 }
 
 .btninplace {
     -webkit-text-fill-color: green;
+    background-image: url("../images/in_place_tile.png");
+    background-size: 100% 100%;
 }
