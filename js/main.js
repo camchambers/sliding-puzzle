@@ -143,11 +143,16 @@ function checkHasWon() {
         currentTile.classList.remove('btn');
         // If it's text matches it's index it's in place, otherwise...
         if (parseInt(currentTileIndex) != parseInt(currentTileValue)) {
-            currentTile.classList.add('btn');
+            currentTile.classList.add('btnoutofplace');
             hasWon = false;
         } else {
             currentTile.classList.add('btninplace');
         }
+        
+        // Blank the tile
+        blankedTile = document.getElementById(`btn${blankedTileIndex}`);
+        blankedTile.removeAttribute("class");
+        blankedTile.classList.add("blanked");
     }
     return hasWon;
 }
@@ -175,6 +180,7 @@ function setBlanked(index) {
     tileToMove.innerHTML = currentBlankTileText;
     
     // Set the class of the tile to be moved so that's it's now `selected` and therefore blank onscreen
+    tileToMove.classList.removeAll;
     tileToMove.classList.add("blanked");
     
     // Set the global iVar to indicate which is the blank square now
