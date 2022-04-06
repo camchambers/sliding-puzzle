@@ -49,7 +49,7 @@ function loadTiles(n) {
         newTile.innerHTML = b;
         
         // Give it the class `btn`
-        newTile.classList.add('btn');
+        newTile.classList.add('btninplace');
         
         // Add a listener for a mouse click and when heard call the `swap(...)` function
         // passing in this button's index number from above
@@ -60,6 +60,7 @@ function loadTiles(n) {
         // Insert the button into the container element
         buttonContainer.append(newTile);
     }
+    
     blankedTileId = 'btn' + blankedTileIndex;
     firstBlankedTile = document.getElementById(blankedTileId);
     firstBlankedTile.classList.add("blanked");
@@ -83,6 +84,7 @@ function shuffle() {
                 direction = blankedTileIndex - size;
             }
             swap(direction);
+            checkHasWon();
             if (i >= totalShuffles - 1) {
                 shuffled = true;
             }

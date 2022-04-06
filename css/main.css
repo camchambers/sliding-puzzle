@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
 html {
+    font-family: 'Titan One', cursive;
      background: radial-gradient(circle, #FF8961, #FFFB89, #74BDCB, #0E42C4) fixed;
 }
 
@@ -17,28 +20,29 @@ h1 {
 }
 
 .blanked {
-    background-color: #FFF !important;
-    border: none !important;
-    color: white !important;
-    -webkit-text-fill-color: white !important;
-    background-image: url("") !important;
+    background-color: #FFF;
+    border: none;
+    color: white;
+    -webkit-text-fill-color: white;
+    background-image: url("");
 }
 
 .btn, .btninplace, .btnoutofplace, .blanked {
+    font-family: 'Titan One', cursive;
     font-size: 24px;
     height: 80px;
     width: 25%;
     cursor: pointer;
-    -webkit-text-fill-color: black;
     background-size: 100% 100%;
 }
 
 .btnoutofplace {
+    -webkit-text-fill-color: black;
     background-image: url("../images/out_of_place_tile.png");
 }
 
 .btninplace {
-    -webkit-text-fill-color: green;
+    -webkit-text-fill-color: #0a3e06;
     background-image: url("../images/in_place_tile.png");
     background-size: 100% 100%;
 }
