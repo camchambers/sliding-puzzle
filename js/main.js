@@ -1,6 +1,6 @@
 let size = 4;
 let numberOfTiles = size ** 2;
-let highlighted = numberOfTiles;
+let blankedTileIndex = numberOfTiles; // Originally called `highlighted`, this is the tile on the board that's currently blank. It always starts the bottom right tile on the board.
 let shuffled = false;
 
 let buttonContainer = document.getElementById('tiles');
@@ -13,13 +13,13 @@ const DOWN_ARROW = 38;
 window.onkeydown = function (event) {
     console.log(event.keyCode);
     if (event.keyCode === RIGHT_ARROW) {
-        swap(highlighted + 1);
+        swap(blankedTileIndex + 1);
     } else if (event.keyCode === LEFT_ARROW) {
-        swap(highlighted - 1);
+        swap(blankedTileIndex - 1);
     } else if (event.keyCode === UP_ARROW) {
-        swap(highlighted + size);
+        swap(blankedTileIndex + size);
     } else if (event.keyCode === DOWN_ARROW) {
-        swap(highlighted - size);
+        swap(blankedTileIndex - size);
     }
 };
 
@@ -35,19 +35,35 @@ function newGame() {
 // Create buttons
 function loadTiles(n) {
     for (let b = 1; b <= numberOfTiles; b++) {
+        
+        // Create a new tile element
         var newTile = document.createElement('button');
+        
+        // Assign the id
         newTile.id = `btn${b}`;
+        
+        // Give the tile an attribute called `index` and set it to `b`
         newTile.setAttribute('index', b);
+        
+        // Set the text (innerHTML) to b so we see the tile's number on screen
         newTile.innerHTML = b;
-        newTile.classList.add('btn');
+        
+        // Give it the class `btn`
+        newTile.classList.add('btninplace');
+        
+        // Add a listener for a mouse click and when heard call the `swap(...)` function
+        // passing in this button's index number from above
         newTile.addEventListener('click', function () {
             swap(parseInt(this.getAttribute('index')));
         });
+        
+        // Insert the button into the container element
         buttonContainer.append(newTile);
     }
-    selectedTileId = 'btn' + highlighted;
-    selectedTile = document.getElementById(selectedTileId);
-    selectedTile.classList.add("selected");
+    
+    blankedTileId = 'btn' + blankedTileIndex;
+    firstBlankedTile = document.getElementById(blankedTileId);
+    firstBlankedTile.classList.add("blanked");
 }
 
 function shuffle() {
@@ -59,15 +75,16 @@ function shuffle() {
             let x = Math.floor(Math.random() * 4);
             let direction = 0;
             if (x == 0) {
-                direction = highlighted + 1;
+                direction = blankedTileIndex + 1;
             } else if (x == 1) {
-                direction = highlighted - 1;
+                direction = blankedTileIndex - 1;
             } else if (x == 2) {
-                direction = highlighted + size;
+                direction = blankedTileIndex + size;
             } else if (x == 3) {
-                direction = highlighted - size;
+                direction = blankedTileIndex - size;
             }
             swap(direction);
+            checkHasWon();
             if (i >= totalShuffles - 1) {
                 shuffled = true;
             }
@@ -77,26 +94,28 @@ function shuffle() {
 
 // Swap tiles 
 function swap(clicked) {
+    
+    // Double-check we've clicked a legit tile
     if (clicked < 1 || clicked > (numberOfTiles)) {
         return;
     }
 
     // Check if we are trying to swap right
-    if (clicked == highlighted + 1) {
+    if (clicked == blankedTileIndex + 1) {
         if (clicked % size != 1) {
-            setSelected(clicked);
+            setBlanked(clicked);
         }
         // Check if we are trying to swap left
-    } else if (clicked == highlighted - 1) {
+    } else if (clicked == blankedTileIndex - 1) {
         if (clicked % size != 0) {
-            setSelected(clicked);
+            setBlanked(clicked);
         }
         // Check if we are trying to swap up
-    } else if (clicked == highlighted + size) {
-        setSelected(clicked);
+    } else if (clicked == blankedTileIndex + size) {
+        setBlanked(clicked);
         // Check if we are trying to swap down 
-    } else if (clicked == highlighted - size) {
-        setSelected(clicked);
+    } else if (clicked == blankedTileIndex - size) {
+        setBlanked(clicked);
     }
 
     if (shuffled) {
@@ -107,25 +126,65 @@ function swap(clicked) {
 }
 
 function checkHasWon() {
-    for (let b = 1; b <= numberOfTiles; b++) {
+    
+    var hasWon = true; // assume we've won
+    
+    for (let b = 1; b <= numberOfTiles; b++) { // scan from top left to bottom right
+        
+        // Get the b-th tile
         currentTile = document.getElementById(`btn${b}`);
+        
+        // Get it's index
         currentTileIndex = currentTile.getAttribute('index');
+        
+        // Get it's text
         currentTileValue = currentTile.innerHTML;
+        
+        
+        currentTile.classList.remove('btninplace');
+        currentTile.classList.remove('btn');
+        // If it's text matches it's index it's in place, otherwise...
         if (parseInt(currentTileIndex) != parseInt(currentTileValue)) {
-            return false;
+            currentTile.classList.add('btnoutofplace');
+            hasWon = false;
+        } else {
+            currentTile.classList.add('btninplace');
         }
+        
+        // Blank the tile
+        blankedTile = document.getElementById(`btn${blankedTileIndex}`);
+        blankedTile.removeAttribute("class");
+        blankedTile.classList.add("blanked");
     }
-    return true;
+    return hasWon;
 }
 
-// Applies stylings to the selected tile
-function setSelected(index) {
-    currentTile = document.getElementById(`btn${highlighted}`);
-    currentTileText = currentTile.innerHTML;
-    currentTile.classList.remove('selected');
-    newTile = document.getElementById(`btn${index}`);
-    currentTile.innerHTML = newTile.innerHTML;
-    newTile.innerHTML = currentTileText;
-    newTile.classList.add("selected");
-    highlighted = index;
+// Moves the tile that's been selected by the user, making this selected tile the blank one onscreen
+// Effectively, we're swapping the clicked tile's text and css with the blank one
+function setBlanked(index) {
+    
+    // Get the currently empty square
+    currentBlankTile = document.getElementById(`btn${blankedTileIndex}`);
+    
+    // Get the currently empty square's text
+    currentBlankTileText = currentBlankTile.innerHTML;
+    
+    // Unmark it as `selected`
+    currentBlankTile.classList.remove('blanked');
+    
+    // Get the `index`-th tile (during the game it's the one that's clicked on or moved by the user)
+    tileToMove = document.getElementById(`btn${index}`);
+    
+    // Pass the text of the moving tile to the blank one
+    currentBlankTile.innerHTML = tileToMove.innerHTML;
+    
+    // Pass in the blank tile to the one that's moving
+    tileToMove.innerHTML = currentBlankTileText;
+    
+    // Set the class of the tile to be moved so that's it's now `selected` and therefore blank onscreen
+    tileToMove.classList.removeAll;
+    tileToMove.classList.add("blanked");
+    
+    // Set the global iVar to indicate which is the blank square now
+    blankedTileIndex = index;
 }
